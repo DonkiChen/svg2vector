@@ -1,12 +1,12 @@
 package com.github.DonkiChen.svg.attribute.group.transform;
 
-import com.github.DonkiChen.tool.MatrixHelper;
+import com.github.DonkiChen.tool.TransformMatrix;
 
 class SkewY implements ITransform{
     @Override
-    public void transformMatrix(MatrixHelper matrixHelper, double[] params) {
+    public void transformMatrix(TransformMatrix transformMatrix, double[] params) {
         if (params.length == 1) {
-            matrixHelper.preSkew(0, params[0]);
+            transformMatrix.preSkew(0, params[0]);
         }
     }
 }

@@ -31,7 +31,7 @@ public class Path extends BaseShape {
                 }
             } else {
                 //非Z
-                pathState = PathDispatcher.dispatch(pathState, command, value.trim(), attributes.matrixHelper);
+                pathState = PathDispatcher.dispatch(pathState, command, value.trim(), attributes.mTransformMatrix);
                 path.append(pathState.transformedPath);
             }
         }

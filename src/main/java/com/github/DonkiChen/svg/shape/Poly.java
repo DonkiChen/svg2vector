@@ -28,7 +28,7 @@ class Poly extends BaseShape {
             String[] xy = string.split("[\\s,]+");
             if (xy.length == 2) {
                 Point point = new Point(xy[0], xy[1]);
-                attributes.matrixHelper.applyTransformToPoint(point);
+                attributes.mTransformMatrix.applyTransformToPoint(point);
                 if (!hasMoved) {
                     hasMoved = true;
                     builder.moveTo(point);

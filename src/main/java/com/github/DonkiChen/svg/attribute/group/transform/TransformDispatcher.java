@@ -2,7 +2,7 @@ package com.github.DonkiChen.svg.attribute.group.transform;
 
 import com.github.DonkiChen.svg.constant.TransformType;
 import com.github.DonkiChen.tool.MathHelper;
-import com.github.DonkiChen.tool.MatrixHelper;
+import com.github.DonkiChen.tool.TransformMatrix;
 
 import java.util.HashMap;
 import java.util.Locale;
@@ -13,22 +13,20 @@ import java.util.regex.Pattern;
 public class TransformDispatcher {
     private static final Map<String, ITransform> TRANSFORM_MAP = new HashMap<>();
     private static final Pattern PATTERN =
-            Pattern.compile("(translate|skew|skewX|skewY|matrix|scale|rotate)\\s*\\(([-0-9.,\\s]+)\\)");
+            Pattern.compile("(translate|skewX|skewY|matrix|scale|rotate)\\s*\\(([-0-9.,\\s]+)\\)");
 
     static {
         TRANSFORM_MAP.put(TransformType.MATRIX, new MatrixTransform());
         TRANSFORM_MAP.put(TransformType.TRANSLATE, new Translate());
         TRANSFORM_MAP.put(TransformType.ROTATE, new Rotate());
         TRANSFORM_MAP.put(TransformType.SCALE, new Scale());
-        //x,y同时倾斜
-        TRANSFORM_MAP.put(TransformType.SKEW, new Skew());
         //x倾斜
         TRANSFORM_MAP.put(TransformType.SKEWX, new SkewX());
         //y倾斜
         TRANSFORM_MAP.put(TransformType.SKEWY, new SkewY());
     }
 
-    public static void dispatch(String data, MatrixHelper matrixHelper) {
+    public static void dispatch(String data, TransformMatrix transformMatrix) {
         Matcher matcher = PATTERN.matcher(data);
         while (matcher.find()) {
             //转换方法名
@@ -49,7 +47,7 @@ public class TransformDispatcher {
                     }
                     params[i] = MathHelper.parseDouble(args[i]);
                 }
-                iTransform.transformMatrix(matrixHelper, params);
+                iTransform.transformMatrix(transformMatrix, params);
             }
         }
     }

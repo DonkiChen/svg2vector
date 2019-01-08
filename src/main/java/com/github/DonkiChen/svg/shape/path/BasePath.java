@@ -2,7 +2,7 @@ package com.github.DonkiChen.svg.shape.path;
 
 import com.github.DonkiChen.svg.bean.Point;
 import com.github.DonkiChen.tool.MathHelper;
-import com.github.DonkiChen.tool.MatrixHelper;
+import com.github.DonkiChen.tool.TransformMatrix;
 
 import java.util.Locale;
 
@@ -13,16 +13,16 @@ public abstract class BasePath {
      * @param pathState    保留上一终点的坐标点
      * @param command      命令
      * @param values       值
-     * @param matrixHelper 坐标变换
+     * @param transformMatrix 坐标变换
      * @return 包含当前命令的终点以及坐标转换后的path
      */
-    abstract PathState performTransform(PathState pathState, String command, String[] values, MatrixHelper matrixHelper);
+    abstract PathState performTransform(PathState pathState, String command, String[] values, TransformMatrix transformMatrix);
 
     public boolean isRelativeCommand(String command) {
         return command.toLowerCase(Locale.CHINA).equals(command);
     }
 
-    public void calLastPoint(Point point, String command, String x, String y, MatrixHelper matrixHelper) {
+    public void calLastPoint(Point point, String command, String x, String y, TransformMatrix transformMatrix) {
         double x1 = MathHelper.parseDouble(x);
         double y1 = MathHelper.parseDouble(y);
         if (isRelativeCommand(command)) {
@@ -32,7 +32,7 @@ public abstract class BasePath {
             point.x = x1;
             point.y = y1;
         }
-        matrixHelper.applyTransformToPoint(point);
+        transformMatrix.applyTransformToPoint(point);
     }
 
     public static class PathState {

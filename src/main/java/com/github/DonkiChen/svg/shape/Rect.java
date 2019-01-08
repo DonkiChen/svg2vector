@@ -20,11 +20,11 @@ public class Rect extends BaseShape {
         Point rightTopPoint = new Point(leftTopPoint.x + width, leftTopPoint.y);
         Point leftBottomPoint = new Point(leftTopPoint.x, leftTopPoint.y + height);
         Point rightBottomPoint = new Point(rightTopPoint.x, leftBottomPoint.y);
-        attributes.matrixHelper.applyTransformToPoints(leftTopPoint, rightTopPoint, leftBottomPoint, rightBottomPoint);
+        attributes.mTransformMatrix.applyTransformToPoints(leftTopPoint, rightTopPoint, leftBottomPoint, rightBottomPoint);
         double rx = SvgHelper.getAttributeDouble(shape, ShapeAttribute.Rect.RX);
         double ry = SvgHelper.getAttributeDouble(shape, ShapeAttribute.Rect.RY);
-        rx = Math.min(attributes.matrixHelper.applyTransformRx(rx), maxRadius);
-        ry = Math.min(attributes.matrixHelper.applyTransformRy(ry), maxRadius);
+        rx = Math.min(attributes.mTransformMatrix.applyTransformRx(rx), maxRadius);
+        ry = Math.min(attributes.mTransformMatrix.applyTransformRy(ry), maxRadius);
         PathBuilder builder = PathBuilder.newBuilder();
         if (rx != 0 || ry != 0) {
             //有圆角

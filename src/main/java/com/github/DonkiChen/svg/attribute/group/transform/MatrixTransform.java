@@ -1,15 +1,15 @@
 package com.github.DonkiChen.svg.attribute.group.transform;
 
 
-import com.github.DonkiChen.tool.MatrixHelper;
+import com.github.DonkiChen.tool.TransformMatrix;
 
 class MatrixTransform implements ITransform {
     @Override
-    public void transformMatrix(MatrixHelper matrixHelper, double[] params) {
+    public void transformMatrix(TransformMatrix transformMatrix, double[] params) {
         //a c e
         //b d f
         if (params.length == 6) {
-            matrixHelper.transform(new double[]{
+            transformMatrix.transform(new double[]{
                     params[0], params[2], params[4]
             }, new double[]{
                     params[1], params[3], params[5]

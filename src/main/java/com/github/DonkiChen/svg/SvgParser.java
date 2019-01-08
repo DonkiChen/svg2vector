@@ -29,11 +29,11 @@ public class SvgParser {
     private XmlHelper mXmlHelper = new XmlHelper();
     private Element mRootElement;
 
-    public SvgParser() {
+    private SvgParser() {
 
     }
 
-    public void searchAllFiles(File dir) {
+    public static void searchAllFiles(File dir) {
         File[] files = dir.listFiles(new FileFilter() {
             @Override
             public boolean accept(File file) {
@@ -45,7 +45,7 @@ public class SvgParser {
                 if (file.isDirectory()) {
                     searchAllFiles(file);
                 } else if (file.getName().endsWith(".svg")) {
-                    parseSvg(file);
+                    new SvgParser().parseSvg(file);
                 }
             }
         }
@@ -108,7 +108,7 @@ public class SvgParser {
                 }
                 XmlPathNode node = ShapeDispatcher.dispatch(element, state.attributes);
                 if (node != null) {
-                    for (double[] doubles : state.attributes.matrixHelper.getMatrix().getArray()) {
+                    for (double[] doubles : state.attributes.mTransformMatrix.getMatrix().getArray()) {
                         System.out.println(Arrays.toString(doubles));
                     }
                     System.out.println();

@@ -16,7 +16,7 @@ public class Line extends BaseShape {
         double y2 = SvgHelper.getAttributeDouble(shape, ShapeAttribute.Line.Y2);
         Point startPoint = new Point(x1, y1);
         Point endPoint = new Point(x2, y2);
-        attributes.matrixHelper.applyTransformToPoints(startPoint, endPoint);
+        attributes.mTransformMatrix.applyTransformToPoints(startPoint, endPoint);
         return PathBuilder.newBuilder().moveTo(startPoint)
                 .lineTo(endPoint).build();
     }

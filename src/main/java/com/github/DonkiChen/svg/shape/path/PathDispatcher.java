@@ -1,7 +1,7 @@
 package com.github.DonkiChen.svg.shape.path;
 
 import com.github.DonkiChen.svg.constant.PathCommand;
-import com.github.DonkiChen.tool.MatrixHelper;
+import com.github.DonkiChen.tool.TransformMatrix;
 
 import java.util.HashMap;
 import java.util.Locale;
@@ -24,7 +24,7 @@ public class PathDispatcher {
 
     //分配到对应的类中
     public static BasePath.PathState dispatch(BasePath.PathState pathState, String command,
-                                              String value, MatrixHelper matrixHelper) {
+                                              String value, TransformMatrix transformMatrix) {
         if (pathState == null) {
             pathState = new BasePath.PathState();
         }
@@ -33,7 +33,7 @@ public class PathDispatcher {
         BasePath basePath = COMMAND_MAP.get(command.toUpperCase(Locale.CHINA));
         if (basePath != null) {
             String[] values = value.split("[\\s,]+");
-            basePath.performTransform(pathState, command, values, matrixHelper);
+            basePath.performTransform(pathState, command, values, transformMatrix);
         }
         return pathState;
     }

@@ -7,6 +7,6 @@ import com.github.DonkiChen.svg.attribute.style.Attributes;
 public class Transform implements IAttribute {
     @Override
     public void resolve(String data, Attributes attributes) {
-        TransformDispatcher.dispatch(data, attributes.matrixHelper);
+        TransformDispatcher.dispatch(data, attributes.mTransformMatrix);
     }
 }

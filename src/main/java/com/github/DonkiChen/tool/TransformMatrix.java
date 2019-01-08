@@ -4,11 +4,11 @@ import com.github.DonkiChen.svg.bean.Point;
 
 import Jama.Matrix;
 
-public class MatrixHelper {
+public class TransformMatrix {
 
     private Matrix mMatrix = WrapperMatrix.newMatrix();
     /**
-     * 缩放矩阵 避免位移/旋转带来的影响
+     * 缩放矩阵 针对半径等 避免位移/旋转带来的影响
      */
     private Matrix mScaleMatrix = WrapperMatrix.newMatrix();
     private WrapperMatrix mMatrix2 = WrapperMatrix.newMatrix();

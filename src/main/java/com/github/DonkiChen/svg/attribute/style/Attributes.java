@@ -1,9 +1,9 @@
 package com.github.DonkiChen.svg.attribute.style;
 
-import com.github.DonkiChen.tool.MatrixHelper;
+import com.github.DonkiChen.tool.TransformMatrix;
 
 public class Attributes {
-    public MatrixHelper matrixHelper = new MatrixHelper();
+    public TransformMatrix mTransformMatrix = new TransformMatrix();
     public Style style = new Style();
 
     /**
@@ -15,7 +15,7 @@ public class Attributes {
         attributes.style.fillType = style.fillType;
         attributes.style.strokeWidth = style.strokeWidth;
         attributes.style.strokeColor = style.strokeColor;
-        attributes.matrixHelper = matrixHelper;
+        attributes.mTransformMatrix = mTransformMatrix;
         return attributes;
     }
 

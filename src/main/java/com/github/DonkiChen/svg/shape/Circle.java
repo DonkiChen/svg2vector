@@ -15,9 +15,9 @@ public class Circle extends BaseShape {
         double rx = SvgHelper.getAttributeDouble(shape, ShapeAttribute.Circle.R);
         double ry = rx;
         Point point = new Point(cx, cy);
-        rx = attributes.matrixHelper.applyTransformRx(rx);
-        ry = attributes.matrixHelper.applyTransformRx(ry);
-        attributes.matrixHelper.applyTransformToPoint(point);
+        rx = attributes.mTransformMatrix.applyTransformRx(rx);
+        ry = attributes.mTransformMatrix.applyTransformRx(ry);
+        attributes.mTransformMatrix.applyTransformToPoint(point);
         return PathBuilder.newBuilder()
                 .moveTo(point)
                 .rMoveTo(-rx, 0)
