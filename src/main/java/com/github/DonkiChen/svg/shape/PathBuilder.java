@@ -12,13 +12,25 @@ public class PathBuilder {
         return new PathBuilder();
     }
 
+    public PathBuilder arcTo(double rx, double ry, double xRotation, boolean largeArc, boolean clockwise,
+                             double endX, double endY) {
+        mPath.append(PathHelper.arcTo(rx, ry, xRotation, largeArc, clockwise, endX, endY));
+        return this;
+    }
+
     public PathBuilder arcTo(double rx, double ry, double endX, double endY) {
         mPath.append(PathHelper.arcTo(rx, ry, endX, endY));
         return this;
     }
 
-    public PathBuilder rArcTo(double rx, double ry, double endX, double endY) {
-        mPath.append(PathHelper.rArcTo(rx, ry, endX, endY));
+    public PathBuilder rArcTo(double rx, double ry, double xRotation, boolean largeArc, boolean clockwise,
+                              double dx, double dy) {
+        mPath.append(PathHelper.rArcTo(rx, ry, xRotation, largeArc, clockwise, dx, dy));
+        return this;
+    }
+
+    public PathBuilder rArcTo(double rx, double ry, double dx, double dy) {
+        mPath.append(PathHelper.rArcTo(rx, ry, dx, dy));
         return this;
     }
 
