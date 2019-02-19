@@ -2,8 +2,8 @@ package com.github.DonkiChen.tool;
 
 import java.text.DecimalFormat;
 
-public class MathHelper {
-    private static final DecimalFormat DECIMAL_FORMAT = new DecimalFormat("0.####");
+public strictfp class MathHelper {
+    private static final DecimalFormat DECIMAL_FORMAT = new DecimalFormat("0.0###");
 
     public static double cos(double degrees) {
 //        return Math.round(Math.cos(Math.toRadians(degrees)) * 100D) / 100D;

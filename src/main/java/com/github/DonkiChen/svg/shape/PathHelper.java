@@ -6,16 +6,34 @@ import com.github.DonkiChen.tool.MathHelper;
 import java.util.Locale;
 
 public class PathHelper {
-    public static String arcTo(double rx, double ry, double endX, double endY) {
-        return String.format(Locale.CHINA, "A%s,%s 0 1 1 %s,%s ",
+    /**
+     * A rx,ry x-axis-rotation large-arc-flag sweep-flag x,y
+     * 含义
+     * A x半径,y半径 x轴的旋转角度 是否是大弧(0:小弧,1:大弧) 绘制方向(0:逆时针,1:顺时针) 终点x,终点y
+     * 解释:确定起点终点可以画4个弧形(起点,终点,椭圆圆心在同一直线时为2个),靠large-arc-flag sweep-flag 搭配
+     */
+    public static String arcTo(double rx, double ry, double xRotation, boolean largeArc, boolean clockwise,
+                               double endX, double endY) {
+        return String.format(Locale.CHINA, "A%s,%s %s %d %d %s,%s",
                 MathHelper.prettyDouble(rx), MathHelper.prettyDouble(ry),
+                MathHelper.prettyDouble(xRotation), largeArc ? 1 : 0, clockwise ? 1 : 0,
                 MathHelper.prettyDouble(endX), MathHelper.prettyDouble(endY));
     }
 
-    public static String rArcTo(double rx, double ry, double endX, double endY) {
-        return String.format(Locale.CHINA, "a%s,%s 0 1 1 %s,%s ",
+    public static String arcTo(double rx, double ry, double endX, double endY) {
+        return arcTo(rx, ry, 0, false, true, endX, endY);
+    }
+
+    public static String rArcTo(double rx, double ry, double xRotation, boolean largeArc, boolean clockwise,
+                                double dx, double dy) {
+        return String.format(Locale.CHINA, "A%s,%s %s %d %d %s,%s",
                 MathHelper.prettyDouble(rx), MathHelper.prettyDouble(ry),
-                MathHelper.prettyDouble(endX), MathHelper.prettyDouble(endY));
+                MathHelper.prettyDouble(xRotation), largeArc ? 1 : 0, clockwise ? 1 : 0,
+                MathHelper.prettyDouble(dx), MathHelper.prettyDouble(dy));
+    }
+
+    public static String rArcTo(double rx, double ry, double dx, double dy) {
+        return rArcTo(rx, ry, 0, false, true, dx, dy);
     }
 
     public static String moveTo(double x, double y) {

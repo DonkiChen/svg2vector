@@ -2,6 +2,8 @@ package com.github.DonkiChen.tool;
 
 import com.github.DonkiChen.svg.bean.Point;
 
+import java.util.Arrays;
+
 import Jama.Matrix;
 
 public class TransformMatrix {
@@ -12,6 +14,16 @@ public class TransformMatrix {
      */
     private Matrix mScaleMatrix = WrapperMatrix.newMatrix();
     private WrapperMatrix mMatrix2 = WrapperMatrix.newMatrix();
+
+    public static String makeString(Matrix matrix) {
+        double[][] array = matrix.getArray();
+        if (array != null && array.length == 3) {
+            return Arrays.toString(array[0]) + "\n"
+                    + Arrays.toString(array[1]) + "\n"
+                    + Arrays.toString(array[2]);
+        }
+        return matrix.toString();
+    }
 
     public void setTranslate(double translateX, double translateY) {
         WrapperMatrix.reset(mMatrix);
@@ -43,7 +55,7 @@ public class TransformMatrix {
         preTranslate(px, py);
         mMatrix2.setRotate(degrees);
         mMatrix = mMatrix.times(mMatrix2);
-        preTranslate(-px, py);
+        preTranslate(-px, -py);
     }
 
     public void preScale(double scaleX, double scaleY) {
@@ -222,6 +234,11 @@ public class TransformMatrix {
             reset();
             set(0, 1, MathHelper.tan(degreesX));
             set(1, 0, MathHelper.tan(degreesY));
+        }
+
+        @Override
+        public String toString() {
+            return makeString(this);
         }
     }
 }
