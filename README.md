@@ -13,3 +13,4 @@ _批量转换svg文件为Android可用的xml_
 - [ ] 支持所有Transform(matrix,translate,rotate,scale,skew,skewx,skewy,transform)
     - [ ] 用Group实现
     - [ ] 直接修改坐标实现
+- [ ] xml2svg
