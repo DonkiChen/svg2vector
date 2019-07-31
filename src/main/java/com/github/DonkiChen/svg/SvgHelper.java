@@ -1,9 +1,9 @@
 package com.github.DonkiChen.svg;
 
+import com.github.DonkiChen.tool.MathHelper;
+
 import org.dom4j.Attribute;
 import org.dom4j.Element;
-
-import com.github.DonkiChen.tool.MathHelper;
 
 public class SvgHelper {
     public static String getAttributeText(Element element, String attributeKey) {

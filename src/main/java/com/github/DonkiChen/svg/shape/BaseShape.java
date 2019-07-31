@@ -6,6 +6,7 @@ import com.github.DonkiChen.svg.attribute.style.Attributes;
 import com.github.DonkiChen.svg.constant.ShapeAttribute;
 import com.github.DonkiChen.svg.constant.StyleAttribute;
 import com.github.DonkiChen.xml.XmlPathNode;
+import com.sun.istack.internal.Nullable;
 
 import org.dom4j.Attribute;
 import org.dom4j.Element;
@@ -13,10 +14,15 @@ import org.dom4j.Element;
 
 public abstract class BaseShape {
 
+    @Nullable
     public XmlPathNode toPathNode(Element shape, Attributes attributes) {
+        String path = resolvePath(shape, attributes);
+        if (path == null || path.isEmpty()) {
+            return null;
+        }
         XmlPathNode xmlPathNode = new XmlPathNode();
         xmlPathNode.style = resolveChildStyle(shape, attributes).style;
-        xmlPathNode.data = resolvePath(shape, attributes);
+        xmlPathNode.data = path;
         return xmlPathNode;
     }
 
@@ -27,6 +33,7 @@ public abstract class BaseShape {
      * @param attributes 父类的属性
      * @return 转换后的节点
      */
+    @Nullable
     abstract String resolvePath(Element shape, Attributes attributes);
 
     public Attributes resolveChildStyle(Element shape, Attributes attributes) {

@@ -1,11 +1,6 @@
 package com.github.DonkiChen.svg.attribute;
 
 import com.github.DonkiChen.svg.attribute.group.Transform;
-
-import java.util.HashMap;
-import java.util.Locale;
-import java.util.Map;
-
 import com.github.DonkiChen.svg.attribute.shape.PathData;
 import com.github.DonkiChen.svg.attribute.shape.Style;
 import com.github.DonkiChen.svg.attribute.style.Attributes;
@@ -15,6 +10,10 @@ import com.github.DonkiChen.svg.attribute.style.StrokeColor;
 import com.github.DonkiChen.svg.attribute.style.StrokeWidth;
 import com.github.DonkiChen.svg.constant.ShapeAttribute;
 import com.github.DonkiChen.svg.constant.StyleAttribute;
+
+import java.util.HashMap;
+import java.util.Locale;
+import java.util.Map;
 
 public class AttributeDispatcher {
     private static final Map<String, IAttribute> ATTRIBUTE_MAP = new HashMap<>();

@@ -1,11 +1,11 @@
 package com.github.DonkiChen.svg.attribute.shape;
 
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
 import com.github.DonkiChen.svg.attribute.AttributeDispatcher;
 import com.github.DonkiChen.svg.attribute.IAttribute;
 import com.github.DonkiChen.svg.attribute.style.Attributes;
+
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class Style implements IAttribute {
     private static final Pattern PATTERN = Pattern.compile("([-\\w]+):\\s*(\\S+)");

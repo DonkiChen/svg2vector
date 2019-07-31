@@ -1,9 +1,9 @@
 package com.github.DonkiChen.svg.shape;
 
-import com.github.DonkiChen.svg.attribute.AttributeDispatcher;
 import com.github.DonkiChen.svg.attribute.style.Attributes;
 import com.github.DonkiChen.svg.constant.SupportShape;
 import com.github.DonkiChen.xml.XmlPathNode;
+import com.sun.istack.internal.Nullable;
 
 import org.dom4j.Element;
 
@@ -29,6 +29,7 @@ public class ShapeDispatcher {
         return SHAPE_MAP.containsKey(name);
     }
 
+    @Nullable
     public static XmlPathNode dispatch(Element shape, Attributes attributes) {
         String lowerCaseName = shape.getName().toLowerCase(Locale.CHINA);
         if (isShapeSupported(lowerCaseName)) {

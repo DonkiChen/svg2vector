@@ -23,6 +23,9 @@ public class Rect extends BaseShape {
         attributes.matrixHelper.applyTransformToPoints(leftTopPoint, rightTopPoint, leftBottomPoint, rightBottomPoint);
         double rx = SvgHelper.getAttributeDouble(shape, ShapeAttribute.Rect.RX);
         double ry = SvgHelper.getAttributeDouble(shape, ShapeAttribute.Rect.RY);
+        if (rx == 0 || ry == 0) {
+            rx = ry = Math.max(rx, ry);
+        }
         rx = Math.min(attributes.matrixHelper.applyTransformRx(rx), maxRadius);
         ry = Math.min(attributes.matrixHelper.applyTransformRy(ry), maxRadius);
         PathBuilder builder = PathBuilder.newBuilder();
@@ -31,20 +34,18 @@ public class Rect extends BaseShape {
             builder.moveTo(leftTopPoint.x + rx, leftTopPoint.y)
                     .lineTo(rightTopPoint.x - rx, rightTopPoint.y)
                     .arcTo(rx, ry, rightTopPoint.x, rightTopPoint.y + ry)
-                    .lineTo(rightTopPoint.center(rightBottomPoint))
+                    .lineTo(rightBottomPoint.x, rightBottomPoint.y - ry)
                     .arcTo(rx, ry, rightBottomPoint.x - rx, rightBottomPoint.y)
                     .lineTo(leftBottomPoint.x + rx, leftBottomPoint.y)
                     .arcTo(rx, ry, leftBottomPoint.x, leftBottomPoint.y - ry)
-                    .lineTo(leftBottomPoint.center(leftTopPoint))
-                    .arcTo(rx, ry, leftTopPoint.x + rx, leftTopPoint.y)
-                    .close();
+                    .lineTo(leftTopPoint.x, leftTopPoint.y + ry)
+                    .arcTo(rx, ry, leftTopPoint.x + rx, leftTopPoint.y);
         } else {
             //无圆角
             builder.moveTo(leftTopPoint)
                     .lineTo(rightTopPoint)
                     .lineTo(rightBottomPoint)
-                    .lineTo(leftBottomPoint)
-                    .close();
+                    .lineTo(leftBottomPoint);
         }
         return builder.build();
     }

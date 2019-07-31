@@ -14,7 +14,7 @@ public class PathHelper {
      */
     public static String arcTo(double rx, double ry, double xRotation, boolean largeArc, boolean clockwise,
                                double endX, double endY) {
-        return String.format(Locale.CHINA, "A%s,%s %s %d %d %s,%s",
+        return String.format(Locale.CHINA, "A%s,%s %s %d %d %s,%s ",
                 MathHelper.prettyDouble(rx), MathHelper.prettyDouble(ry),
                 MathHelper.prettyDouble(xRotation), largeArc ? 1 : 0, clockwise ? 1 : 0,
                 MathHelper.prettyDouble(endX), MathHelper.prettyDouble(endY));
@@ -26,13 +26,19 @@ public class PathHelper {
 
     public static String rArcTo(double rx, double ry, double xRotation, boolean largeArc, boolean clockwise,
                                 double dx, double dy) {
-        return String.format(Locale.CHINA, "A%s,%s %s %d %d %s,%s",
+        if (dx == 0 && dy == 0) {
+            return "";
+        }
+        return String.format(Locale.CHINA, "a%s,%s %s %d %d %s,%s ",
                 MathHelper.prettyDouble(rx), MathHelper.prettyDouble(ry),
                 MathHelper.prettyDouble(xRotation), largeArc ? 1 : 0, clockwise ? 1 : 0,
                 MathHelper.prettyDouble(dx), MathHelper.prettyDouble(dy));
     }
 
     public static String rArcTo(double rx, double ry, double dx, double dy) {
+        if (dx == 0 && dy == 0) {
+            return "";
+        }
         return rArcTo(rx, ry, 0, false, true, dx, dy);
     }
 
@@ -42,6 +48,9 @@ public class PathHelper {
     }
 
     public static String rMoveTo(double x, double y) {
+        if (x == 0 && y == 0) {
+            return "";
+        }
         return String.format(Locale.CHINA, "m%s,%s ",
                 MathHelper.prettyDouble(x), MathHelper.prettyDouble(y));
     }
@@ -51,6 +60,9 @@ public class PathHelper {
     }
 
     public static String rMoveTo(Point point) {
+        if (point.x == 0 && point.y == 0) {
+            return "";
+        }
         return rMoveTo(point.x, point.y);
     }
 
@@ -59,6 +71,9 @@ public class PathHelper {
     }
 
     public static String rHorizontalTo(double x) {
+        if (x == 0) {
+            return "";
+        }
         return String.format(Locale.CHINA, "h%s ", MathHelper.prettyDouble(x));
     }
 
@@ -67,6 +82,9 @@ public class PathHelper {
     }
 
     public static String rVerticalTo(double y) {
+        if (y == 0) {
+            return "";
+        }
         return String.format(Locale.CHINA, "v%s ", MathHelper.prettyDouble(y));
     }
 
@@ -76,6 +94,9 @@ public class PathHelper {
     }
 
     public static String rLineTo(double x, double y) {
+        if (x == 0 && y == 0) {
+            return "";
+        }
         return String.format(Locale.CHINA, "l%s,%s ",
                 MathHelper.prettyDouble(x), MathHelper.prettyDouble(y));
     }
@@ -89,6 +110,6 @@ public class PathHelper {
     }
 
     public static String close() {
-        return "Z ";
+        return "Z";
     }
 }
